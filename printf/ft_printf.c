@@ -6,7 +6,7 @@
 /*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 22:25:16 by sergee            #+#    #+#             */
-/*   Updated: 2017/12/25 15:58:18 by sergee           ###   ########.fr       */
+/*   Updated: 2017/12/25 23:21:45 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,18 @@ static int	ft_width(char *str)
 	if (str[i] == '*')
 		g_flag.width = va_arg(g_ap, int);
 	else
+	{
+		g_flag.width = 0;
 		while (str[i] >= '0' && str[i] <= '9')
 			g_flag.width = g_flag.width * 10 + (str[i++] - 48);
+		i--;
+	}
 	if (g_flag.width < 0)
 	{
 		g_flag.width = -g_flag.width;
 		g_flag.flags[0] = 1;
 	}
 	// printf("/width= %d/\n", g_flag.width);
-	// printf("i= %d\n", i);
 	return (i);
 }
 
@@ -71,8 +74,6 @@ static int	ft_precision(char *str)
 	else if (str[i] == '.' && str[i + 1] > '0' && str[i + 1] <= '9' && ++i)
 		while (str[i] >= '0' && str[i] <= '9')
 			g_flag.precision = g_flag.precision * 10 + (str[i++] - 48);
-	if (g_flag.precision < 0)
-		g_flag.precision = 0;
 	return (i);
 }
 

@@ -6,7 +6,7 @@
 /*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 01:03:20 by sergee            #+#    #+#             */
-/*   Updated: 2017/12/25 16:36:53 by sergee           ###   ########.fr       */
+/*   Updated: 2017/12/25 23:16:16 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_conver	g_conver[] = {
 	{"zi", ft_lnbr, ft_lnbrlen, 10, NULL},
 	{"li", ft_lnbr, ft_lnbrlen, 9, NULL},
 	{"lli", ft_lnbr, ft_lnbrlen, 9, NULL},
+	{"ji", ft_lnbr, ft_lnbrlen, 9, NULL},
 	/* %o */
 	{"o", ft_o_nbr, ft_o_nbrlen, 7, "0"},
 	{"ho", ft_o_nbr, ft_o_nbrlen, 5, "0"},
@@ -205,7 +206,6 @@ void	ft_free(void)
 		g_flag.flags[i] = 0;
 	g_flag.width = 0;
 	g_flag.precision = 0;
-	i = 3;
 	ft_bzero(g_flag.conversion, ft_strlen(g_flag.conversion));
 	return;
 }

@@ -6,7 +6,7 @@
 /*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 14:59:10 by skushnir          #+#    #+#             */
-/*   Updated: 2017/12/25 16:06:18 by sergee           ###   ########.fr       */
+/*   Updated: 2017/12/26 00:00:32 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static void	ft_write(t_conver c, t_basic types)
 		ft_strchr(c.conv, 'D') || ft_strchr(c.conv, 'I'))
 		&& arg_zero(types, c) >= 0)
 		ft_putchar('+');
-	if ((g_flag.flags[3] && ((c.size >= 3 && c.size <= 7) || c.size >= 12 ||
-	c.size == 9) && arg_zero(types, c) <= 0) || c.size == 8)
+	if ((g_flag.flags[3] && (c.size <= 7 || c.size >= 9)
+		&& arg_zero(types, c) <= 0) || c.size == 8)
 		ft_putstr(c.prefix);
 	ft_wr_func(&c, types, c.wrfunc);
 	if (g_flag.flags[0])
@@ -55,7 +55,10 @@ static void	ft_write(t_conver c, t_basic types)
 
 static void	ft_apply_nbr(t_conver c, t_basic types)
 {
-	if (!ft_strchr(c.conv, 'o') || !g_flag.flags[3])
+	g_flag.precision < 0 ? g_flag.precision = 0 : 0;
+	(arg_zero(types, c) == 1 && (ft_strchr(c.conv, 'c') || ft_strchr(c.conv, 'C')))
+		? g_flag.precision = 1 : 0; 
+	if ((!ft_strchr(c.conv, 'O') && !ft_strchr(c.conv, 'o')) || !g_flag.flags[3])
 		if (arg_zero(types, c) == 1 && g_flag.flags[8] && !g_flag.precision)
 		{
 			c.size == 8 ? ft_putstr(c.prefix) : 0;
@@ -63,8 +66,7 @@ static void	ft_apply_nbr(t_conver c, t_basic types)
 					ft_putchar(' ');
 			return;
 		}
-	if (g_flag.flags[1] && arg_zero(types, c) != -1)
-		g_flag.width--;
+	(g_flag.flags[1] && arg_zero(types, c) != -1) ? g_flag.width-- : 0;
 	if (!g_flag.flags[8])
 		{
 			c.size >= 12 ? g_flag.precision = 6 : 0;
@@ -78,7 +80,7 @@ static void	ft_apply_nbr(t_conver c, t_basic types)
 		g_flag.flags[4] ? g_flag.precision = g_flag.width : 0;
 	}
 	if (g_flag.flags[2] && (ft_strchr(c.conv, 'd') || ft_strchr(c.conv, 'i') ||
-		ft_strchr(c.conv, 'D') || ft_strchr(c.conv, 'I')) && !g_flag.flags[1] && !arg_zero(types, c))
+		ft_strchr(c.conv, 'D') || ft_strchr(c.conv, 'I')) && !g_flag.flags[1] && arg_zero(types, c) >= 0)
 	{	
 		ft_putchar(' ');
 		g_flag.width--;
@@ -110,10 +112,10 @@ void	ft_apply_flags(void)
 	if ((ft_strchr(c.conv, 'S') || ft_strchr(c.conv, 's')))
 	{
 		i = ft_len_func(&c, types, c.lenfunc);
-		if (!g_flag.precision || !i)
-			g_flag.precision = i;
-		g_flag.width < (i - g_flag.precision) ?
-		g_flag.width = i - g_flag.precision : 0;
+		if (g_flag.flags[8] && !g_flag.precision)
+			return;
+		(g_flag.precision <= 0 || !i) ? g_flag.precision = i : 0;
+		g_flag.width < (i = (i - g_flag.precision)) ? g_flag.width = i : 0;
 		ft_write(c, types);
 	}
 	else
