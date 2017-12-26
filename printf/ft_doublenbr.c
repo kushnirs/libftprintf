@@ -12,6 +12,16 @@
 
 #include "ft_printf.h"
 
+static double ft_pow(double i, int a)
+{
+	double res;
+
+	res = i;
+	while (a--)
+		i *= res;
+	return (i);
+}
+
 void	ft_f_nbr(double n, int i)
 {
 	double	fraction;
@@ -30,9 +40,10 @@ void	ft_f_nbr(double n, int i)
 	if (n < 0)
 		n = -n;
 	fraction = n - (long)n;
+	fraction += 0.5 * ft_pow(0.1, (double)i);
 	while (i-- > 0)
 	{
-		ft_unbr((fraction *= 10), 0); 
+		ft_unbr((fraction *= 10), 0);
 		fraction -= (long)fraction;
 	}
 }
@@ -55,6 +66,7 @@ void	ft_fl_nbr(t_ld n, int i)
 	if (n < 0)
 		n = -n;
 	fraction = n - (long)n;
+	fraction += 0.5 * ft_pow(0.1, (double)i);
 	while (i-- > 0)
 	{
 		ft_unbr((fraction *= 10), 0); 
