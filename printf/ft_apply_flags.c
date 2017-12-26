@@ -89,7 +89,7 @@ static void	ft_apply_nbr(t_conver c, t_basic types)
 		g_flag.precision++;
 	if (g_flag.flags[4] && !g_flag.flags[0] && (c.size <= 7 || c.size >= 12 || c.size == 9))
 		!g_flag.precision ? g_flag.precision = g_flag.width : 0;
-	if (g_flag.precision < ft_len_func(&c, types, c.lenfunc))
+	if (g_flag.precision < ft_len_func(&c, types, c.lenfunc) && c.size < 12)
 		g_flag.precision = ft_len_func(&c, types, c.lenfunc);
 	ft_write(c, types);
 	return;
