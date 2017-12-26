@@ -14,7 +14,7 @@
 
 void	ft_putchar(int c)
 {
-	if (c <= 0x7F)
+	if (MB_CUR_MAX < 4 || c <= 0x7F)
 		ft_putchar_fd(c, 1);
 	else if (c <= 0x7FF)
 	{
