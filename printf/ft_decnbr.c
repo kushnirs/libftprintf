@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void			ft_nbr(int n, int i)
+void		ft_nbr(int n, int i)
 {
 	int		a;
 	int		c;
@@ -39,7 +39,7 @@ void			ft_nbr(int n, int i)
 	}
 }
 
-void			ft_lnbr(intmax_t n, int i)
+void		ft_lnbr(intmax_t n, int i)
 {
 	long		a;
 	int			c;
@@ -66,10 +66,10 @@ void			ft_lnbr(intmax_t n, int i)
 	}
 }
 
-void			ft_unbr(t_ui n, int i)
+void		ft_unbr(t_ui n, int i)
 {
-	long		a;
-	int			c;
+	long			a;
+	int				c;
 	unsigned int	b;
 
 	while (i-- > ft_unbrlen(n))
@@ -88,7 +88,7 @@ void			ft_unbr(t_ui n, int i)
 	}
 }
 
-void			ft_ulnbr(uintmax_t n, int i)
+void		ft_ulnbr(uintmax_t n, int i)
 {
 	t_ul		a;
 	long		c;
@@ -110,9 +110,9 @@ void			ft_ulnbr(uintmax_t n, int i)
 	}
 }
 
-size_t	ft_nbrlen(int nbr)
+size_t		ft_nbrlen(int nbr)
 {
-	int	i;
+	int				i;
 	unsigned long	nb;
 
 	i = 1;
@@ -120,24 +120,24 @@ size_t	ft_nbrlen(int nbr)
 	if (nbr < 0)
 		nb = -nb;
 	nbr < 0 ? i++ : 0;
-	while((nb = nb / 10) >= 1)
+	while ((nb = nb / 10) >= 1)
 		i++;
 	return (i);
 }
 
-size_t	ft_unbrlen(t_ui nbr)
+size_t		ft_unbrlen(t_ui nbr)
 {
 	long	i;
 
 	i = 1;
-	while((nbr = nbr / 10) >= 1)
+	while ((nbr = nbr / 10) >= 1)
 		i++;
 	return (i);
 }
 
-size_t	ft_lnbrlen(long nbr)
+size_t		ft_lnbrlen(long nbr)
 {
-	int	i;
+	int				i;
 	unsigned long	nb;
 
 	i = 1;
@@ -145,19 +145,19 @@ size_t	ft_lnbrlen(long nbr)
 	if (nbr < 0)
 		nb = -nb;
 	nbr < 0 ? i++ : 0;
-	while((nb = nb / 10) >= 1)
+	while ((nb = nb / 10) >= 1)
 		i++;
 	return (i);
 }
 
-size_t	ft_ulnbrlen(t_ul nbr)
+size_t		ft_ulnbrlen(t_ul nbr)
 {
 	int		i;
 	t_ul	nb;
 
 	i = 1;
 	nb = nbr;
-	while((nb = nb / 10) >= 1)
+	while ((nb = nb / 10) >= 1)
 		i++;
 	return (i);
 }

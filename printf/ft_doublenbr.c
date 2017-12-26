@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static double ft_pow(double i, double a)
+static double	ft_pow(double i, double a)
 {
 	double res;
 
@@ -24,7 +24,7 @@ static double ft_pow(double i, double a)
 	return (res);
 }
 
-void	ft_f_nbr(double n, int i)
+void			ft_f_nbr(double n, int i)
 {
 	double	fraction;
 
@@ -35,7 +35,7 @@ void	ft_f_nbr(double n, int i)
 			n == INF ? ft_putstr("inf") : ft_putstr("nan");
 		else
 			n == INF ? ft_putstr("INF") : ft_putstr("NAN");
-		return;
+		return ;
 	}
 	ft_lnbr((long)n, 0);
 	i != 0 ? ft_putchar('.') : 0;
@@ -50,7 +50,7 @@ void	ft_f_nbr(double n, int i)
 	}
 }
 
-void	ft_fl_nbr(t_ld n, int i)
+void			ft_fl_nbr(t_ld n, int i)
 {
 	t_ld	fraction;
 
@@ -61,7 +61,7 @@ void	ft_fl_nbr(t_ld n, int i)
 			n == INF ? ft_putstr("inf") : ft_putstr("nan");
 		else
 			n == INF ? ft_putstr("INF") : ft_putstr("NAN");
-		return;
+		return ;
 	}
 	ft_nbr((long)n, 0);
 	i != 0 ? ft_putchar('.') : 0;
@@ -71,12 +71,12 @@ void	ft_fl_nbr(t_ld n, int i)
 	fraction += 0.5 * ft_pow(0.1, (double)i);
 	while (i-- > 0)
 	{
-		ft_unbr((fraction *= 10), 0); 
+		ft_unbr((fraction *= 10), 0);
 		fraction -= (long)fraction;
 	}
 }
 
-size_t	ft_f_nbrlen(double n, int i)
+size_t			ft_f_nbrlen(double n, int i)
 {
 	size_t len;
 
@@ -86,7 +86,7 @@ size_t	ft_f_nbrlen(double n, int i)
 	return (len);
 }
 
-size_t	ft_fl_nbrlen(t_ld n, int i)
+size_t			ft_fl_nbrlen(t_ld n, int i)
 {
 	size_t len;
 

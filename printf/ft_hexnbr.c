@@ -21,7 +21,7 @@ void	ft_x_nbr(t_ui n, int a)
 
 	num = n;
 	i = 0;
-	while(num >= 1)
+	while (num >= 1)
 	{
 		n = num % 16;
 		str[i] = n + 48;
@@ -36,7 +36,7 @@ void	ft_x_nbr(t_ui n, int a)
 	nbr = ft_strrev(str);
 	ft_putstr(nbr);
 	ft_memdel((void**)&nbr);
-	return;
+	return ;
 }
 
 void	ft_x_lnbr(uintmax_t n, int a)
@@ -48,7 +48,7 @@ void	ft_x_lnbr(uintmax_t n, int a)
 
 	num = n;
 	i = 0;
-	while(num >= 1)
+	while (num >= 1)
 	{
 		n = num % 16;
 		str[i] = n + 48;
@@ -63,7 +63,7 @@ void	ft_x_lnbr(uintmax_t n, int a)
 	nbr = ft_strrev(str);
 	ft_putstr(nbr);
 	ft_memdel((void**)&nbr);
-	return;
+	return ;
 }
 
 size_t	ft_x_nbrlen(t_ui n, int a)
@@ -76,7 +76,7 @@ size_t	ft_x_nbrlen(t_ui n, int a)
 		return (1);
 	num = n;
 	i = 0;
-	while(num >= 1)
+	while (num >= 1)
 	{
 		n = num % 16;
 		str[i] = n + 48;
@@ -99,7 +99,7 @@ size_t	ft_x_lnbrlen(uintmax_t n, int a)
 		return (1);
 	num = n;
 	i = 0;
-	while(num >= 1)
+	while (num >= 1)
 	{
 		n = num % 16;
 		str[i] = n + 48;

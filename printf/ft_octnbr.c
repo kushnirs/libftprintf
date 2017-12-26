@@ -20,7 +20,7 @@ void	ft_o_nbr(t_ui n, int a)
 	char	str[21];
 
 	i = 0;
-	while(n >= 1)
+	while (n >= 1)
 	{
 		num = n / 8;
 		n = n % 8;
@@ -33,7 +33,7 @@ void	ft_o_nbr(t_ui n, int a)
 		ft_putchar('0');
 	ft_putstr(tmp);
 	ft_memdel((void**)&tmp);
-	return;
+	return ;
 }
 
 void	ft_o_lnbr(t_ul n, int a)
@@ -44,7 +44,7 @@ void	ft_o_lnbr(t_ul n, int a)
 	char	str[21];
 
 	i = 0;
-	while(n >= 1)
+	while (n >= 1)
 	{
 		num = n / 8;
 		n = n % 8;
@@ -57,10 +57,10 @@ void	ft_o_lnbr(t_ul n, int a)
 		ft_putchar('0');
 	ft_putstr(tmp);
 	ft_memdel((void**)&tmp);
-	return;
+	return ;
 }
 
-size_t ft_o_nbrlen(t_ui n)
+size_t	ft_o_nbrlen(t_ui n)
 {
 	size_t	len;
 
@@ -75,7 +75,7 @@ size_t ft_o_nbrlen(t_ui n)
 	return (len);
 }
 
-size_t ft_o_lnbrlen(t_ul n)
+size_t	ft_o_lnbrlen(t_ul n)
 {
 	size_t	len;
 
@@ -89,4 +89,3 @@ size_t ft_o_lnbrlen(t_ul n)
 	}
 	return (len);
 }
-

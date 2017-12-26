@@ -40,7 +40,6 @@ size_t		ft_strnlen(const char *string, size_t n)
 {
 	size_t	i;
 
-
 	if (!string)
 		return (6);
 	i = 0;
@@ -64,7 +63,7 @@ size_t		ft_strunlen(const int *string, size_t n)
 	return (i);
 }
 
-size_t	ft_ucharlen(int c)
+size_t		ft_ucharlen(int c)
 {
 	if (MB_CUR_MAX < 4 || c <= 0x7F)
 		return (1);

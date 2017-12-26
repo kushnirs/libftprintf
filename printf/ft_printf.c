@@ -17,7 +17,7 @@ static int	ft_find_conversion(char *str)
 	int i;
 
 	i = -1;
-	while(str[++i])
+	while (str[++i])
 	{
 		if (str[i] == 'h' || str[i] == 'l' || str[i] == 'j' || str[i] == 'z'
 			|| str[i] == 'L')
@@ -25,16 +25,16 @@ static int	ft_find_conversion(char *str)
 		else if (str[i] == 'd' || str[i] == 'c' || str[i] == 'u' || str[i] == 'X'
 			|| str[i] == 'x' || str[i] == 'b' || str[i] == 'e' || str[i] == 'E' ||
 			str[i] == 'f' || str[i] == 'g' || str[i] == 'G' || str[i] == 'S' ||
-			str[i] == 's' || str[i] == 'p' || str[i] == 'o' || 	str[i] == 'U' 
+			str[i] == 's' || str[i] == 'p' || str[i] == 'o' || 	str[i] == 'U'
 			|| str[i] == 'i' || str[i] == 'D' || str[i] == 'O' || str[i] == 'C'
 			|| str[i] == 'F')
 		{
 			g_flag.conversion[i] = str[i];
 			g_flag.conversion[i + 1] = 0;
-			break;
+			break ;
 		}
 		else
-			break;
+			break ;
 	}
 	if (!g_flag.conversion[0])
 		return (ft_percent(&str[i]));
@@ -94,7 +94,7 @@ static int	ft_read_flags(char *str)
 		str[i] == '$' ? g_flag.flags[5] = 1 : 0;
 		str[i] == 'L' ? g_flag.flags[6] = 1 : 0;
 		str[i] == '\'' ? g_flag.flags[7] = 1 : 0;
-		str[i] == '.' ?	g_flag.flags[8] = 1 : 0;
+		str[i] == '.' ? g_flag.flags[8] = 1 : 0;
 		if ((str[i] == '*' && str[i - 1] != '.') ||
 			(str[i] > '0' && str[i] <= '9' && str[i - 1] != '.'))
 			i += ft_width(&str[i]);
@@ -102,7 +102,7 @@ static int	ft_read_flags(char *str)
 			i += ft_precision(&str[i]);
 		if ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z')
 			|| str[i] == '%')
-			break;
+			break ;
 	}
 	//str[i] == 0 ? i-- : 0;
 	// for (int k = 0; k < 9; k++)
@@ -110,7 +110,7 @@ static int	ft_read_flags(char *str)
 	return (i + ft_find_conversion(&str[i]));
 }
 
-int	ft_printf(const char *format, ...)
+int		ft_printf(const char *format, ...)
 {
 	char	*str;
 

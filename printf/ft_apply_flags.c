@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int ft_percent(char *str)
+int			ft_percent(char *str)
 {
 	if (g_flag.flags[0])
 	{
@@ -22,7 +22,7 @@ int ft_percent(char *str)
 		return (1);
 	}
 	while (--g_flag.width > 0)
-			ft_putchar(' ');
+		ft_putchar(' ');
 	ft_putchar(*str);
 	return (1);
 }
@@ -50,7 +50,7 @@ static void	ft_write(t_conver c, t_basic types)
 	if (g_flag.flags[0])
 			while (g_flag.width-- > g_flag.precision)
 				ft_putchar(' ');
-	return;
+	return ;
 }
 
 static void	ft_apply_nbr(t_conver c, t_basic types)
@@ -64,7 +64,7 @@ static void	ft_apply_nbr(t_conver c, t_basic types)
 			c.size == 8 ? ft_putstr(c.prefix) : 0;
 			while (g_flag.width--)
 					ft_putchar(' ');
-			return;
+			return ;
 		}
 	(g_flag.flags[1] && arg_zero(types, c) != -1) ? g_flag.width-- : 0;
 	if (!g_flag.flags[8])
@@ -81,7 +81,7 @@ static void	ft_apply_nbr(t_conver c, t_basic types)
 	}
 	if (g_flag.flags[2] && (ft_strchr(c.conv, 'd') || ft_strchr(c.conv, 'i') ||
 		ft_strchr(c.conv, 'D') || ft_strchr(c.conv, 'I')) && !g_flag.flags[1] && arg_zero(types, c) >= 0)
-	{	
+	{
 		ft_putchar(' ');
 		g_flag.width--;
 	}
@@ -92,10 +92,10 @@ static void	ft_apply_nbr(t_conver c, t_basic types)
 	if (g_flag.precision < ft_len_func(&c, types, c.lenfunc) && c.size < 12)
 		g_flag.precision = ft_len_func(&c, types, c.lenfunc);
 	ft_write(c, types);
-	return;
+	return ;
 }
 
-void	ft_apply_flags(void)
+void		ft_apply_flags(void)
 {
 	int			i;
 	t_basic		types;
@@ -117,5 +117,5 @@ void	ft_apply_flags(void)
 	}
 	else
 		ft_apply_nbr(c, types);
-	return;
+	return ;
 }

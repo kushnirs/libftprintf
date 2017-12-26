@@ -207,7 +207,7 @@ void	ft_free(void)
 	g_flag.width = 0;
 	g_flag.precision = 0;
 	ft_bzero(g_flag.conversion, ft_strlen(g_flag.conversion));
-	return;
+	return ;
 }
 
 int		arg_zero(t_basic arg, t_conver c)
@@ -254,5 +254,5 @@ void	ft_wr_func(t_conver *c, t_basic types, void (*func)())
 		func((*(double *)&types), g_flag.precision);
 	else
 		func((*(t_ld *)&types), g_flag.precision);
-	return;
+	return ;
 }
