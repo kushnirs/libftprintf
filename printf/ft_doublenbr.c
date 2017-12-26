@@ -19,7 +19,7 @@ static double ft_pow(double i, double a)
 	if (a <= 0)
 		return (1);
 	res = i;
-	while (a--)
+	while (a-- > 1)
 		res *= i;
 	return (res);
 }
