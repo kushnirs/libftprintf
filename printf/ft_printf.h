@@ -70,6 +70,7 @@ extern va_list	g_ap;
 
 int		ft_printf(const char *format, ...);
 int		arg_zero(t_basic arg, t_conver c);
+int		ft_percent(char *str);
 void	ft_free(void);
 void	ft_apply_flags(void);
 void	ft_wr_func(t_conver *c, t_basic types, void (*func)());

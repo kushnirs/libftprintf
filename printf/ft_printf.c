@@ -25,17 +25,19 @@ static int	ft_find_conversion(char *str)
 		else if (str[i] == 'd' || str[i] == 'c' || str[i] == 'u' || str[i] == 'X'
 			|| str[i] == 'x' || str[i] == 'b' || str[i] == 'e' || str[i] == 'E' ||
 			str[i] == 'f' || str[i] == 'g' || str[i] == 'G' || str[i] == 'S' ||
-			str[i] == 's' || str[i] == 'p' || str[i] == 'o' || str[i] == '%' ||
-			str[i] == 'U' || str[i] == 'i' || str[i] == 'D' || str[i] == 'O' ||
-			str[i] == 'C')
+			str[i] == 's' || str[i] == 'p' || str[i] == 'o' || 	str[i] == 'U' 
+			|| str[i] == 'i' || str[i] == 'D' || str[i] == 'O' || str[i] == 'C'
+			|| str[i] == 'F')
 		{
 			g_flag.conversion[i] = str[i];
 			g_flag.conversion[i + 1] = 0;
 			break;
 		}
+		else
+			break;
 	}
 	if (!g_flag.conversion[0])
-		return (0);
+		return (ft_percent(&str[i]));
 	ft_apply_flags();
 	return (i + 1);
 }
@@ -122,7 +124,7 @@ int	ft_printf(const char *format, ...)
 			str += ft_read_flags(str + 1);
 			ft_free();
 		}
-		else if (*str != '%')
+		else
 			ft_putchar(*str);
 		// if (!*str)
 		// 	return (symb);

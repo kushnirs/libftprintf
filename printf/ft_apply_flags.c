@@ -12,19 +12,19 @@
 
 #include "ft_printf.h"
 
-static void ft_percent(void)
+int ft_percent(char *str)
 {
 	if (g_flag.flags[0])
 	{
-		ft_putchar('%');
+		ft_putchar(*str);
 		while (--g_flag.width > 0)
 			ft_putchar(' ');
-		return;
+		return (1);
 	}
 	while (--g_flag.width > 0)
 			ft_putchar(' ');
-	ft_putchar('%');
-	return;
+	ft_putchar(*str);
+	return (1);
 }
 
 static void	ft_write(t_conver c, t_basic types)
@@ -101,8 +101,6 @@ void	ft_apply_flags(void)
 	t_basic		types;
 	t_conver	c;
 
-	if (!ft_strcmp("%", g_flag.conversion))
-		return (ft_percent());
 	i = 0;
 	while (ft_strcmp(g_conver[i].conv, g_flag.conversion))
 		i++;

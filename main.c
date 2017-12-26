@@ -60,7 +60,7 @@ int main(void)
 // ft_printf("%+C", 0);
 // ft_printf("%+o", 0);
 // ft_printf("%+o", 42);
-printf("%d\n", ft_printf("%#.3o", 15));
+printf("%d\n", ft_printf("{%-15Z}", 123));
 // printf("%d\n", ft_printf("{%05s}", "abc"));
 // ft_printf("%+O", 42);
 // ft_printf("[%+s]", 0);
@@ -71,7 +71,7 @@ printf("\n---------------\n");
 // printf("%+C", 0);
 // printf("%+o", 0);
 // printf("%+o", 42);
-printf("%d\n", printf("%#.3o", 15));
+printf("%d\n", printf("{%-15Z}", 123));
 // printf("%d\n", printf("{%05s}", "abc"));
 // printf("%+O", 42);
 // printf("[%+s]", 0);

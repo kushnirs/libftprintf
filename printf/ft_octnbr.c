@@ -32,6 +32,7 @@ void	ft_o_nbr(t_ui n, int a)
 	while (a-- > ft_strlen(tmp))
 		ft_putchar('0');
 	ft_putstr(tmp);
+	ft_memdel((void**)&tmp);
 	return;
 }
 
@@ -55,6 +56,7 @@ void	ft_o_lnbr(t_ul n, int a)
 	while (a-- > ft_strlen(tmp))
 		ft_putchar('0');
 	ft_putstr(tmp);
+	ft_memdel((void**)&tmp);
 	return;
 }
 
