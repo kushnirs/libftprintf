@@ -111,9 +111,8 @@ void	ft_apply_flags(void)
 	{
 		i = ft_len_func(&c, types, c.lenfunc);
 		if (g_flag.flags[8] && !g_flag.precision)
-			return;
-		(g_flag.precision <= 0 || !i) ? g_flag.precision = i : 0;
-		g_flag.width < (i = (i - g_flag.precision)) ? g_flag.width = i : 0;
+			i = 0;
+		(g_flag.precision <= 0 || !i || g_flag.precision > i) ? g_flag.precision = i : 0;
 		ft_write(c, types);
 	}
 	else

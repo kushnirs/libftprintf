@@ -12,14 +12,16 @@
 
 #include "ft_printf.h"
 
-static double ft_pow(double i, int a)
+static double ft_pow(double i, double a)
 {
 	double res;
 
+	if (a <= 0)
+		return (1);
 	res = i;
 	while (a--)
-		i *= res;
-	return (i);
+		res *= i;
+	return (res);
 }
 
 void	ft_f_nbr(double n, int i)
