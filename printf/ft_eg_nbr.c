@@ -17,7 +17,10 @@ void	ft_e_nbr(double n, int i)
 	int	count;
 
 	if (n < 0)
+	{
 		n = -n;
+		ft_putchar('-');
+	}
 	count = 0;
 	while ((n = n / 10) >= 1)
 		count++;
@@ -36,7 +39,10 @@ void	ft_el_nbr(t_ld n, int i)
 	int	count;
 
 	if (n < 0)
+	{
 		n = -n;
+		ft_putchar('-');
+	}
 	count = 0;
 	while ((n = n / 10) >= 1)
 		count++;
