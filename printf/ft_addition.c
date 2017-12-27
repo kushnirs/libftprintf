@@ -6,16 +6,16 @@
 /*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 01:03:20 by sergee            #+#    #+#             */
-/*   Updated: 2017/12/25 23:16:16 by sergee           ###   ########.fr       */
+/*   Updated: 2017/12/27 22:11:36 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 size_t symb;
-t_flags g_flag = {{0}, 0, 0, {0}};
+t_flags g_f = {{0}, 0, 0, {0}};
 va_list	g_ap;
-t_conver	g_conver[] = {
+t_conver	g_c[] = {
 	/* %d */
 	{"d", ft_nbr, ft_nbrlen, 7, NULL},
 	{"hd", ft_nbr, ft_nbrlen, 6, NULL},
@@ -147,6 +147,7 @@ t_conver	g_conver[] = {
 	{"hhE", ft_e_nbr, ft_e_nbrlen, 13, NULL},
 	{"jE", ft_e_nbr, ft_e_nbrlen, 12, NULL},
 	{"zE", ft_e_nbr, ft_e_nbrlen, 12, NULL},
+	{0, 0, 0, 0, 0}
 	/* %b */
 	// {"b", ft_putbinary, ft_nbrblen, 9, "0b", 1, 0},
 	// {"lb", ft_putbinary, ft_nbrblen, 9, "0b", 1, 0},
@@ -203,10 +204,10 @@ void	ft_free(void)
 
 	i = 9;
 	while (--i >= 0)
-		g_flag.flags[i] = 0;
-	g_flag.width = 0;
-	g_flag.precision = 0;
-	ft_bzero(g_flag.conversion, ft_strlen(g_flag.conversion));
+		g_f.flags[i] = 0;
+	g_f.w = 0;
+	g_f.p = 0;
+	ft_bzero(g_f.conversion, ft_strlen(g_f.conversion));
 	return ;
 }
 
@@ -242,17 +243,17 @@ size_t	ft_len_func(t_conver *c, t_basic types, size_t (*func)())
 	if (c->size < 12)
 		return (func(*(void **)&types));
 	else if (c->size < 14)
-		return (func(*(double *)&types, g_flag.precision));
-	return (func(*(t_ld *)&types, g_flag.precision));
+		return (func(*(double *)&types, g_f.p));
+	return (func(*(t_ld *)&types, g_f.p));
 }
 
 void	ft_wr_func(t_conver *c, t_basic types, void (*func)())
 {
 	if (c->size < 12)
-		func((*(void **)&types), g_flag.precision);
+		func((*(void **)&types), g_f.p);
 	else if (c->size < 14)
-		func((*(double *)&types), g_flag.precision);
+		func((*(double *)&types), g_f.p);
 	else
-		func((*(t_ld *)&types), g_flag.precision);
+		func((*(t_ld *)&types), g_f.p);
 	return ;
 }

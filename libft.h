@@ -6,7 +6,7 @@
 /*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 17:42:31 by skushnir          #+#    #+#             */
-/*   Updated: 2017/12/18 00:50:12 by sergee           ###   ########.fr       */
+/*   Updated: 2017/12/27 23:13:49 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char			*ft_strstr(const char *string1, const char *string2);
 char			*ft_strnstr(const char *string1, const char *string2,
 							size_t len);
 int				ft_strcmp(const char *s1, const char *s2);
+int				ft_strpcmp(const char *s1, const char *s2);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 int				ft_atoi(const char *str);
 int				ft_isalpha(int c);

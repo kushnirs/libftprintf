@@ -6,7 +6,7 @@
 /*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/27 23:56:36 by skushnir          #+#    #+#             */
-/*   Updated: 2017/12/25 12:43:32 by sergee           ###   ########.fr       */
+/*   Updated: 2017/12/27 23:13:41 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ size_t		ft_strunlen(const int *string, size_t n)
 	j = ft_strulen(string);
 	(intmax_t)n < j ? j = n : 0;
 	i = 0;
-	while (*string && (n -= ft_ucharlen(*string)) >= 0)
+	while (*string && (j -= ft_ucharlen(*string)) >= 0)
 		i += ft_ucharlen(*string++);
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 12:54:22 by skushnir          #+#    #+#             */
-/*   Updated: 2017/12/25 23:53:35 by sergee           ###   ########.fr       */
+/*   Updated: 2017/12/28 00:24:01 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ int main(void)
 // ft_printf("%+C", 0);
 // ft_printf("%+o", 0);
 // ft_printf("%+o", 42);
-double jopa = 2.14748456776;
-printf("%d\n", ft_printf("%.8f", jopa));
+printf("%d\n", ft_printf("{%5p}", 0));
 // printf("%d\n", ft_printf("{%05s}", "abc"));
 // ft_printf("%+O", 42);
 // ft_printf("[%+s]", 0);
@@ -72,7 +71,7 @@ printf("\n---------------\n\n");
 // printf("%+C", 0);
 // printf("%+o", 0);
 // printf("%+o", 42);
-printf("%d\n", printf("%.8f", jopa));
+printf("%d\n", printf("{%5p}", 0));
 // printf("%d\n", printf("{%05s}", "abc"));
 // printf("%+O", 42);
 // printf("[%+s]", 0);

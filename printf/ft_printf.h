@@ -6,7 +6,7 @@
 /*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 22:25:29 by sergee            #+#    #+#             */
-/*   Updated: 2017/12/25 16:41:22 by sergee           ###   ########.fr       */
+/*   Updated: 2017/12/27 21:42:02 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ typedef	unsigned short	t_ush;
 typedef struct s_flags
 {
 	int		flags[9];
-	int		width;
-	int		precision;
+	int		w;
+	int		p;
 	char	conversion[4];
 }				t_flags;
 
@@ -45,7 +45,7 @@ typedef struct s_conver
 {
 	char	*conv;
 	void	(*wrfunc)();
-	t_ul	(*lenfunc)();
+	t_ul	(*lenf)();
 	char	size;
 	char	*prefix;
 }				t_conver;
@@ -64,13 +64,13 @@ typedef union			u_basic
 	ptrdiff_t	pd;
 }						t_basic;
 
-extern t_flags g_flag;
-extern t_conver	g_conver[];
+extern t_flags g_f;
+extern t_conver	g_c[];
 extern va_list	g_ap;
 
 int		ft_printf(const char *format, ...);
 int		arg_zero(t_basic arg, t_conver c);
-int		ft_percent(char *str);
+int		ft_nonconv(char *str);
 void	ft_free(void);
 void	ft_apply_flags(void);
 void	ft_wr_func(t_conver *c, t_basic types, void (*func)());
@@ -104,6 +104,5 @@ size_t	ft_f_nbrlen(double n, int i);
 size_t	ft_fl_nbrlen(t_ld n, int i);
 size_t	ft_e_nbrlen(double n, int i);
 size_t	ft_el_nbrlen(t_ld n, int i);
-
 
 #endif

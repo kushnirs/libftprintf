@@ -6,7 +6,7 @@
 /*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 22:25:16 by sergee            #+#    #+#             */
-/*   Updated: 2017/12/25 23:21:45 by sergee           ###   ########.fr       */
+/*   Updated: 2017/12/28 00:28:25 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,19 @@ static int	ft_find_conversion(char *str)
 	i = -1;
 	while (str[++i])
 	{
-		if (str[i] == 'h' || str[i] == 'l' || str[i] == 'j' || str[i] == 'z'
-			|| str[i] == 'L')
-			g_flag.conversion[i] = str[i];
-		else if (str[i] == 'd' || str[i] == 'c' || str[i] == 'u' || str[i] == 'X'
-			|| str[i] == 'x' || str[i] == 'b' || str[i] == 'e' || str[i] == 'E' ||
-			str[i] == 'f' || str[i] == 'g' || str[i] == 'G' || str[i] == 'S' ||
-			str[i] == 's' || str[i] == 'p' || str[i] == 'o' || 	str[i] == 'U'
-			|| str[i] == 'i' || str[i] == 'D' || str[i] == 'O' || str[i] == 'C'
-			|| str[i] == 'F')
+		if (ft_strchr("hljzL", str[i]))
+			g_f.conversion[i] = str[i];
+		else if (ft_strchr("dDcCuUxXeEfFgGsSoOip", str[i]))
 		{
-			g_flag.conversion[i] = str[i];
-			g_flag.conversion[i + 1] = 0;
+			g_f.conversion[i] = str[i];
+			g_f.conversion[i + 1] = 0;
 			break ;
 		}
 		else
 			break ;
 	}
-	if (!g_flag.conversion[0])
-		return (ft_percent(&str[i]));
+	if (!ft_strchr("dDcCuUxXeEfFgGsSoOip", str[i]))
+		return (ft_nonconv(&str[i]));
 	ft_apply_flags();
 	return (i + 1);
 }
@@ -48,20 +42,20 @@ static int	ft_width(char *str)
 
 	i = 0;
 	if (str[i] == '*')
-		g_flag.width = va_arg(g_ap, int);
+		g_f.w = va_arg(g_ap, int);
 	else
 	{
-		g_flag.width = 0;
+		g_f.w = 0;
 		while (str[i] >= '0' && str[i] <= '9')
-			g_flag.width = g_flag.width * 10 + (str[i++] - 48);
+			g_f.w = g_f.w * 10 + (str[i++] - 48);
 		i--;
 	}
-	if (g_flag.width < 0)
+	if (g_f.w < 0)
 	{
-		g_flag.width = -g_flag.width;
-		g_flag.flags[0] = 1;
+		g_f.w = -g_f.w;
+		g_f.flags[0] = 1;
 	}
-	// printf("/width= %d/\n", g_flag.width);
+	// printf("/w= %d/\n", g_f.w);
 	return (i);
 }
 
@@ -69,13 +63,13 @@ static int	ft_precision(char *str)
 {
 	int i;
 
-	g_flag.flags[8] = 1;
+	g_f.flags[8] = 1;
 	i = 0;
 	if (str[i] == '.' && str[i + 1] == '*')
-		g_flag.precision = va_arg(g_ap, int);
+		g_f.p = va_arg(g_ap, int);
 	else if (str[i] == '.' && str[i + 1] > '0' && str[i + 1] <= '9' && ++i)
 		while (str[i] >= '0' && str[i] <= '9')
-			g_flag.precision = g_flag.precision * 10 + (str[i++] - 48);
+			g_f.p = g_f.p * 10 + (str[i++] - 48);
 	return (i);
 }
 
@@ -86,28 +80,26 @@ static int	ft_read_flags(char *str)
 	i = -1;
 	while (str[++i])
 	{
-		str[i] == '-' ? g_flag.flags[0] = 1 : 0;
-		str[i] == '+' ? g_flag.flags[1] = 1 : 0;
-		str[i] == ' ' ? g_flag.flags[2] = 1 : 0;
-		str[i] == '#' ? g_flag.flags[3] = 1 : 0;
-		str[i] == '0' ? g_flag.flags[4] = 1 : 0;
-		str[i] == '$' ? g_flag.flags[5] = 1 : 0;
-		str[i] == 'L' ? g_flag.flags[6] = 1 : 0;
-		str[i] == '\'' ? g_flag.flags[7] = 1 : 0;
-		str[i] == '.' ? g_flag.flags[8] = 1 : 0;
+		str[i] == '-' ? g_f.flags[0] = 1 : 0;
+		str[i] == '+' ? g_f.flags[1] = 1 : 0;
+		str[i] == ' ' ? g_f.flags[2] = 1 : 0;
+		str[i] == '#' ? g_f.flags[3] = 1 : 0;
+		str[i] == '0' ? g_f.flags[4] = 1 : 0;
+		str[i] == '$' ? g_f.flags[5] = 1 : 0;
+		str[i] == 'L' ? g_f.flags[6] = 1 : 0;
+		str[i] == '\'' ? g_f.flags[7] = 1 : 0;
+		str[i] == '.' ? g_f.flags[8] = 1 : 0;
 		if ((str[i] == '*' && str[i - 1] != '.') ||
 			(str[i] > '0' && str[i] <= '9' && str[i - 1] != '.'))
 			i += ft_width(&str[i]);
-		if (str[i] == '.')
-			i += ft_precision(&str[i]);
-		if ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z')
-			|| str[i] == '%')
+		str[i] == '.' ?	i += ft_precision(&str[i]) : 0;
+		if (!ft_strchr("-+ #0$L.*0123456789", str[i]))
 			break ;
 	}
-	//str[i] == 0 ? i-- : 0;
+	str[i] ? i += ft_find_conversion(&str[i]) : 0;
 	// for (int k = 0; k < 9; k++)
-	// 	printf("/flags= %d/\n", g_flag.flags[k]);
-	return (i + ft_find_conversion(&str[i]));
+	// 	printf("/flags= %d/\n", g_f.flags[k]);
+	return (i);
 }
 
 int		ft_printf(const char *format, ...)
@@ -126,8 +118,6 @@ int		ft_printf(const char *format, ...)
 		}
 		else
 			ft_putchar(*str);
-		// if (!*str)
-		// 	return (symb);
 		str++;
 	}
 	return (symb);

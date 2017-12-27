@@ -6,7 +6,7 @@
 /*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:47:07 by skushnir          #+#    #+#             */
-/*   Updated: 2017/12/18 02:16:46 by sergee           ###   ########.fr       */
+/*   Updated: 2017/12/27 21:31:36 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_e_nbr(double n, int i)
 	while ((n = n / 10) >= 1)
 		count++;
 	ft_f_nbr(n *= 10, i);
-	if (!ft_strcmp("e", g_flag.conversion) || !ft_strcmp("Le", g_flag.conversion))
+	if (!ft_strcmp("e", g_f.conversion) || !ft_strcmp("Le", g_f.conversion))
 		ft_putstr("e+");
 	else
 		ft_putstr("E+");
@@ -47,7 +47,7 @@ void	ft_el_nbr(t_ld n, int i)
 	while ((n = n / 10) >= 1)
 		count++;
 	ft_fl_nbr(n *= 10, i);
-	if (!ft_strcmp("e", g_flag.conversion) || !ft_strcmp("Le", g_flag.conversion))
+	if (!ft_strcmp("e", g_f.conversion) || !ft_strcmp("Le", g_f.conversion))
 		ft_putstr("e+");
 	else
 		ft_putstr("E+");
