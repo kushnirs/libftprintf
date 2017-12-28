@@ -6,7 +6,7 @@
 /*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:47:07 by skushnir          #+#    #+#             */
-/*   Updated: 2017/12/25 15:26:16 by sergee           ###   ########.fr       */
+/*   Updated: 2017/12/28 11:22:19 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,56 +108,4 @@ void		ft_ulnbr(uintmax_t n, int i)
 		a = a / 10;
 		ft_putchar(c);
 	}
-}
-
-size_t		ft_nbrlen(int nbr)
-{
-	int				i;
-	unsigned long	nb;
-
-	i = 1;
-	nb = nbr;
-	if (nbr < 0)
-		nb = -nb;
-	nbr < 0 ? i++ : 0;
-	while ((nb = nb / 10) >= 1)
-		i++;
-	return (i);
-}
-
-size_t		ft_unbrlen(t_ui nbr)
-{
-	long	i;
-
-	i = 1;
-	while ((nbr = nbr / 10) >= 1)
-		i++;
-	return (i);
-}
-
-size_t		ft_lnbrlen(long nbr)
-{
-	int				i;
-	unsigned long	nb;
-
-	i = 1;
-	nb = nbr;
-	if (nbr < 0)
-		nb = -nb;
-	nbr < 0 ? i++ : 0;
-	while ((nb = nb / 10) >= 1)
-		i++;
-	return (i);
-}
-
-size_t		ft_ulnbrlen(t_ul nbr)
-{
-	int		i;
-	t_ul	nb;
-
-	i = 1;
-	nb = nbr;
-	while ((nb = nb / 10) >= 1)
-		i++;
-	return (i);
 }
