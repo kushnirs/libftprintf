@@ -6,7 +6,7 @@
 /*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 22:25:29 by sergee            #+#    #+#             */
-/*   Updated: 2017/12/27 21:42:02 by sergee           ###   ########.fr       */
+/*   Updated: 2017/12/28 11:08:06 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ extern t_conver	g_c[];
 extern va_list	g_ap;
 
 int		ft_printf(const char *format, ...);
-int		arg_zero(t_basic arg, t_conver c);
+int		arg_zero(t_basic *arg, t_conver *c);
 int		ft_nonconv(char *str);
 void	ft_free(void);
 void	ft_apply_flags(void);

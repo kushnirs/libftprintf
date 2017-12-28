@@ -6,7 +6,7 @@
 /*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 01:03:20 by sergee            #+#    #+#             */
-/*   Updated: 2017/12/27 22:11:36 by sergee           ###   ########.fr       */
+/*   Updated: 2017/12/28 11:10:12 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,29 +211,29 @@ void	ft_free(void)
 	return ;
 }
 
-int		arg_zero(t_basic arg, t_conver c)
+int		arg_zero(t_basic *arg, t_conver *c)
 {
-	if (c.size <= 2 && arg.c == 0)
+	if (c->size <= 2 && arg->c == 0)
 		return (1);
-	else if (c.size <= 7 && arg.i == 0)
+	else if (c->size <= 7 && arg->i == 0)
 		return (1);
-	else if (c.size <= 7 && arg.i < 0)
+	else if (c->size <= 7 && arg->i < 0)
 		return (-1);
-	else if (c.size <= 8 && arg.p == 0)
+	else if (c->size <= 8 && arg->p == 0)
 		return (1);
-	else if (c.size <= 10 && arg.im == 0)
+	else if (c->size <= 10 && arg->im == 0)
 		return (1);
-	else if (c.size < 10 && arg.im < 0)
+	else if (c->size < 10 && arg->im < 0)
 		return (-1);
-	else if (c.size <= 11 && arg.pd == 0)
+	else if (c->size <= 11 && arg->pd == 0)
 		return (1);
-	else if (c.size <= 13 && arg.f == 0)
+	else if (c->size <= 13 && arg->f == 0)
 		return (1);
-	else if (c.size <= 13 && arg.f < 0)
+	else if (c->size <= 13 && arg->f < 0)
 		return (-1);
-	else if (c.size <= 14 && arg.lf == 0)
+	else if (c->size <= 14 && arg->lf == 0)
 		return (1);
-	else if (c.size <= 14 && arg.lf < 0)
+	else if (c->size <= 14 && arg->lf < 0)
 		return (-1);
 	return (0);
 }
