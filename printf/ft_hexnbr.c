@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void	ft_x_nbr(t_ui n, int a)
+void	ft_x_nbr(t_ui n, t_ul a)
 {
 	int		i;
 	char	*nbr;
@@ -40,7 +40,7 @@ void	ft_x_nbr(t_ui n, int a)
 	return ;
 }
 
-void	ft_x_lnbr(uintmax_t n, int a)
+void	ft_x_lnbr(uintmax_t n, t_ul a)
 {
 	int		i;
 	char	*nbr;
@@ -68,7 +68,7 @@ void	ft_x_lnbr(uintmax_t n, int a)
 	return ;
 }
 
-size_t	ft_x_nbrlen(t_ui n, int a)
+size_t	ft_x_nbrlen(t_ui n)
 {
 	int		i;
 	t_ui	num;
@@ -90,7 +90,7 @@ size_t	ft_x_nbrlen(t_ui n, int a)
 	return (ft_strlen(str));
 }
 
-size_t	ft_x_lnbrlen(uintmax_t n, int a)
+size_t	ft_x_lnbrlen(uintmax_t n)
 {
 	int		i;
 	t_ul	num;

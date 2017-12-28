@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void	ft_o_nbr(t_ui n, int a)
+void	ft_o_nbr(t_ui n, t_ul a)
 {
 	int		i;
 	t_ui	num;
@@ -36,7 +36,7 @@ void	ft_o_nbr(t_ui n, int a)
 	return ;
 }
 
-void	ft_o_lnbr(t_ul n, int a)
+void	ft_o_lnbr(t_ul n, t_ul a)
 {
 	int		i;
 	t_ul	num;

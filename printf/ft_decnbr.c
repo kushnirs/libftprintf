@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void		ft_nbr(int n, int i)
+void		ft_nbr(int n, t_ul i)
 {
 	int		a;
 	int		c;
@@ -39,7 +39,7 @@ void		ft_nbr(int n, int i)
 	}
 }
 
-void		ft_lnbr(intmax_t n, int i)
+void		ft_lnbr(intmax_t n, t_ul i)
 {
 	long		a;
 	int			c;
@@ -66,7 +66,7 @@ void		ft_lnbr(intmax_t n, int i)
 	}
 }
 
-void		ft_unbr(t_ui n, int i)
+void		ft_unbr(t_ui n, t_ul i)
 {
 	long			a;
 	int				c;
@@ -88,7 +88,7 @@ void		ft_unbr(t_ui n, int i)
 	}
 }
 
-void		ft_ulnbr(uintmax_t n, int i)
+void		ft_ulnbr(uintmax_t n, t_ul i)
 {
 	t_ul		a;
 	long		c;

@@ -14,7 +14,6 @@
 
 size_t g_symb = 0;
 t_flags g_f = {{0}, 0, 0, {0}};
-va_list	g_ap;
 t_conver	g_c[] = {
 	{"d", ft_nbr, ft_nbrlen, 7, NULL},
 	{"hd", ft_nbr, ft_nbrlen, 6, NULL},
@@ -152,41 +151,25 @@ t_conver	g_c[] = {
 	{"zB", ft_bin_nbr, ft_bin_nbrlen, 9, "0B"},
 	{"jB", ft_bin_nbr, ft_bin_nbrlen, 9, "0B"},
 	{0, 0, 0, 0, 0}
-	/* 
-	** {"r", ft_putnnp_l, ft_strnnplen, 8, NULL},
-	** {"lr", ft_putnnp_l, ft_strnnplen, 8, NULL},
-	** {"llr", ft_putnnp_l, ft_strnnplen, 8, NULL},
-	** {"hr", ft_putnnp_l, ft_strnnplen, 8, NULL},
-	** {"hhr", ft_putnnp_l, ft_strnnplen, 8, NULL},
-	** {"zr", ft_putnnp_l, ft_strnnplen, 8, NULL},
-	** {"jr", ft_putnnp_l, ft_strnnplen, 8, NULL},
-	** {"R", ft_putnnp_u, ft_strnnplen, 8, NULL},
-	** {"lR", ft_putnnp_u, ft_strnnplen, 8, NULL},
-	** {"llR", ft_putnnp_u, ft_strnnplen, 8, NULL},
-	** {"hR", ft_putnnp_u, ft_strnnplen, 8, NULL},
-	** {"hhR", ft_putnnp_u, ft_strnnplen, 8, NULL},
-	** {"zR", ft_putnnp_u, ft_strnnplen, 8, NULL},
-	** {"jR", ft_putnnp_u, ft_strnnplen, 8, NULL},
-	*/
 };
 
-void	set_types(t_conver *conv, t_basic *types)
+void	set_types(t_conver *conv, t_basic *types, va_list *ap)
 {
 	types->c = 0;
-	conv->size == 1 ? types->c = (char)va_arg(g_ap, int) : 0;
-	conv->size == 2 ? types->c = va_arg(g_ap, int) : 0;
-	conv->size == 3 ? types->i = (t_uc)va_arg(g_ap, int) : 0;
-	conv->size == 4 ? types->i = (char)va_arg(g_ap, int) : 0;
-	conv->size == 5 ? types->i = (t_ush)va_arg(g_ap, int) : 0;
-	conv->size == 6 ? types->i = (short)va_arg(g_ap, int) : 0;
-	conv->size == 7 ? types->i = va_arg(g_ap, int) : 0;
-	conv->size == 8 ? types->p = va_arg(g_ap, void *) : 0;
-	conv->size == 9 ? types->im = va_arg(g_ap, intmax_t) : 0;
-	conv->size == 10 ? types->im = va_arg(g_ap, size_t) : 0;
-	conv->size == 11 ? types->pd = va_arg(g_ap, ptrdiff_t) : 0;
-	conv->size == 12 ? types->f = va_arg(g_ap, double) : 0;
-	conv->size == 13 ? types->f = (float)va_arg(g_ap, double) : 0;
-	conv->size == 14 ? types->lf = va_arg(g_ap, t_ld) : 0;
+	conv->size == 1 ? types->c = (char)va_arg(*ap, int) : 0;
+	conv->size == 2 ? types->c = va_arg(*ap, int) : 0;
+	conv->size == 3 ? types->i = (t_uc)va_arg(*ap, int) : 0;
+	conv->size == 4 ? types->i = (char)va_arg(*ap, int) : 0;
+	conv->size == 5 ? types->i = (t_ush)va_arg(*ap, int) : 0;
+	conv->size == 6 ? types->i = (short)va_arg(*ap, int) : 0;
+	conv->size == 7 ? types->i = va_arg(*ap, int) : 0;
+	conv->size == 8 ? types->p = va_arg(*ap, void *) : 0;
+	conv->size == 9 ? types->im = va_arg(*ap, intmax_t) : 0;
+	conv->size == 10 ? types->im = va_arg(*ap, size_t) : 0;
+	conv->size == 11 ? types->pd = va_arg(*ap, ptrdiff_t) : 0;
+	conv->size == 12 ? types->f = va_arg(*ap, double) : 0;
+	conv->size == 13 ? types->f = (float)va_arg(*ap, double) : 0;
+	conv->size == 14 ? types->lf = va_arg(*ap, t_ld) : 0;
 }
 
 void	ft_free(void)
@@ -204,29 +187,31 @@ void	ft_free(void)
 
 int		arg_zero(t_basic *arg, t_conver *c)
 {
-	if (c->size <= 2 && arg->c == 0)
-		return (1);
-	else if (c->size <= 7 && arg->i == 0)
-		return (1);
-	else if (c->size <= 7 && arg->i < 0)
-		return (-1);
-	else if (c->size <= 8 && arg->p == 0)
-		return (1);
-	else if (c->size <= 10 && arg->im == 0)
-		return (1);
-	else if (c->size < 10 && arg->im < 0)
-		return (-1);
-	else if (c->size <= 11 && arg->pd == 0)
-		return (1);
-	else if (c->size <= 13 && arg->f == 0)
-		return (1);
-	else if (c->size <= 13 && arg->f < 0)
-		return (-1);
-	else if (c->size <= 14 && arg->lf == 0)
-		return (1);
-	else if (c->size <= 14 && arg->lf < 0)
-		return (-1);
-	return (0);
+	int q;
+
+	q = 0;
+	c->size == 1 && arg->c == 0 ? q = 1 : 0;
+	c->size == 2 && arg->c == 0 ? q = 1 : 0;
+	c->size == 3 && arg->i == 0 ? q = 1 : 0;
+	c->size == 4 && arg->i == 0 ? q = 1 : 0;
+	c->size == 5 && arg->i == 0 ? q = 1 : 0;
+	c->size == 6 && arg->i == 0 ? q = 1 : 0;
+	c->size == 7 && arg->i == 0 ? q = 1 : 0;
+	c->size <= 7 && arg->i < 0 ? q = -1 : 0;
+	c->size == 8 && arg->p == 0 ? q = 1 : 0;
+	c->size == 9 && arg->im == 0 ? q = 1 : 0;
+	c->size == 9 && arg->im < 0 ? q = -1 : 0;
+	c->size == 10 && arg->im == 0 ? q = 1 : 0;
+	c->size == 10 && arg->im < 0 ? q = -1 : 0;
+	c->size == 11 && arg->pd == 0 ? q = 1 : 0;
+	c->size == 11 && arg->pd < 0 ? q = -1 : 0;
+	c->size == 12 && arg->f == 0 ? q = 1 : 0;
+	c->size == 12 && arg->f < 0 ? q = -1 : 0;
+	c->size == 13 && arg->f == 0 ? q = 1 : 0;
+	c->size == 13 && arg->f < 0 ? q = -1 : 0;
+	c->size == 14 && arg->lf == 0 ? q = 1 : 0;
+	c->size == 14 && arg->lf < 0 ? q = -1 : 0;
+	return (q);
 }
 
 size_t	ft_len_func(t_conver *c, t_basic types, size_t (*func)())

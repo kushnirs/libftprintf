@@ -18,6 +18,8 @@ char	*ft_strrev(char *str)
 	int		k;
 	char	*tmp;
 
+	if (!str)
+		return (NULL);
 	i = ft_strlen(str);
 	tmp = ft_strnew(i);
 	k = 0;

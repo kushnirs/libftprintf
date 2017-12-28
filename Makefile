@@ -25,7 +25,7 @@ SRC =  ft_putstr.c ft_strmapi.c ft_putstr_fd.c ft_strncat.c ft_atoi.c	\
 	ft_lstnew.c ft_putnbr_fd.c ft_strmap.c ft_strrev.c ft_putnstr.c		\
 	printf/ft_addition.c printf/ft_apply_flags.c printf/ft_decnbr.c		\
 	printf/ft_doublenbr.c printf/ft_eg_nbr.c printf/ft_hexnbr.c			\
-	printf/ft_len.c printf/ft_octnbr.c	printf/ft_printf.c ft_strpcmp.c	\
+	printf/ft_octnbr.c	printf/ft_printf.c ft_strpcmp.c					\
 	printf/ft_decnbrlen.c printf/ft_binnbr.c
 	
 OBJ = $(SRC:.c=.o)
@@ -37,7 +37,7 @@ $(NAME): $(OBJ)
 	@ranlib $(NAME)
 
 .c.o:
-	@gcc -c $< -o $@
+	@gcc  -Wall -Wextra -Werror -c $< -o $@
 
 clean:
 	@rm -f $(OBJ)
