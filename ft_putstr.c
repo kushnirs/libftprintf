@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:39:32 by skushnir          #+#    #+#             */
-/*   Updated: 2017/12/18 15:17:08 by skushnir         ###   ########.fr       */
+/*   Updated: 2017/12/28 11:23:57 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_putstr(char const *s)
 	i = 0;
 	while (s[i])
 	{
-		symb += write(1, &s[i], 1);
+		ft_putchar(s[i]);
 		i++;
 	}
 	return ;
