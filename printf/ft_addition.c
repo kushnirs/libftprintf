@@ -12,11 +12,10 @@
 
 #include "ft_printf.h"
 
-size_t symb;
+size_t g_symb = 0;
 t_flags g_f = {{0}, 0, 0, {0}};
 va_list	g_ap;
 t_conver	g_c[] = {
-	/* %d */
 	{"d", ft_nbr, ft_nbrlen, 7, NULL},
 	{"hd", ft_nbr, ft_nbrlen, 6, NULL},
 	{"hhd", ft_nbr, ft_nbrlen, 4, NULL},
@@ -31,7 +30,6 @@ t_conver	g_c[] = {
 	{"llD", ft_lnbr, ft_lnbrlen, 9, NULL},
 	{"jD", ft_lnbr, ft_lnbrlen, 9, NULL},
 	{"zD", ft_lnbr, ft_lnbrlen, 10, NULL},
-	/* %i */
 	{"i", ft_nbr, ft_nbrlen, 7, NULL},
 	{"hi", ft_nbr, ft_nbrlen, 6, NULL},
 	{"hhi", ft_nbr, ft_nbrlen, 4, NULL},
@@ -39,7 +37,6 @@ t_conver	g_c[] = {
 	{"li", ft_lnbr, ft_lnbrlen, 9, NULL},
 	{"lli", ft_lnbr, ft_lnbrlen, 9, NULL},
 	{"ji", ft_lnbr, ft_lnbrlen, 9, NULL},
-	/* %o */
 	{"o", ft_o_nbr, ft_o_nbrlen, 7, "0"},
 	{"ho", ft_o_nbr, ft_o_nbrlen, 5, "0"},
 	{"hho", ft_o_nbr, ft_o_nbrlen, 3, "0"},
@@ -54,13 +51,11 @@ t_conver	g_c[] = {
 	{"jO", ft_o_lnbr, ft_o_lnbrlen, 9, "0"},
 	{"lO", ft_o_lnbr, ft_o_lnbrlen, 9, "0"},
 	{"llO", ft_o_lnbr, ft_o_lnbrlen, 9, "0"},
-	/* %s */
 	{"s", ft_putnstr, ft_strnlen, 8, NULL},
 	{"S", ft_putunstr, ft_strunlen, 8, NULL},
 	{"hS", ft_putunstr, ft_strunlen, 8, NULL},
 	{"hhS", ft_putunstr, ft_strunlen, 8, NULL},
 	{"ls", ft_putunstr, ft_strunlen, 8, NULL},
-	/* %x */
 	{"x", ft_x_nbr, ft_x_nbrlen, 7, "0x"},
 	{"zx", ft_x_lnbr, ft_x_lnbrlen, 10, NULL},
 	{"hx", ft_x_nbr, ft_x_nbrlen, 5, "0x"},
@@ -75,7 +70,6 @@ t_conver	g_c[] = {
 	{"jX", ft_x_lnbr, ft_x_lnbrlen, 9, "0X"},
 	{"lX", ft_x_lnbr, ft_x_lnbrlen, 9, "0X"},
 	{"llX", ft_x_lnbr, ft_x_lnbrlen, 9, "0X"},
-	/* %u */
 	{"u", ft_unbr, ft_unbrlen, 7, NULL},
 	{"zu", ft_ulnbr, ft_ulnbrlen, 10, NULL},
 	{"hu", ft_unbr, ft_unbrlen, 5, NULL},
@@ -90,7 +84,6 @@ t_conver	g_c[] = {
 	{"ju", ft_ulnbr, ft_ulnbrlen, 9, NULL},
 	{"lu", ft_ulnbr, ft_ulnbrlen, 9, NULL},
 	{"llu", ft_ulnbr, ft_ulnbrlen, 9, NULL},
-	/* %c */
 	{"c", ft_putchar, ft_ucharlen, 1, NULL},
 	{"zc", ft_putchar, ft_ucharlen, 1, NULL},
 	{"jc", ft_putchar, ft_ucharlen, 2, NULL},
@@ -105,7 +98,6 @@ t_conver	g_c[] = {
 	{"llC", ft_putchar, ft_ucharlen, 2, NULL},
 	{"hC", ft_putchar, ft_ucharlen, 2, NULL},
 	{"hhC", ft_putchar, ft_ucharlen, 2, NULL},
-	/* %p */
 	{"p", ft_x_lnbr, ft_x_lnbrlen, 8, "0x"},
 	{"lp", ft_x_lnbr, ft_x_lnbrlen, 8, "0x"},
 	{"llp", ft_x_lnbr, ft_x_lnbrlen, 8, "0x"},
@@ -113,7 +105,6 @@ t_conver	g_c[] = {
 	{"hhp", ft_x_lnbr, ft_x_lnbrlen, 8, "0x"},
 	{"zp", ft_x_lnbr, ft_x_lnbrlen, 8, "0x"},
 	{"jp", ft_x_lnbr, ft_x_lnbrlen, 8, "0x"},
-	/* %f */
 	{"f", ft_f_nbr, ft_f_nbrlen, 12, NULL},
 	{"Lf", ft_fl_nbr, ft_fl_nbrlen, 14, NULL},
 	{"lf", ft_f_nbr, ft_f_nbrlen, 12, NULL},
@@ -130,7 +121,6 @@ t_conver	g_c[] = {
 	{"hhF", ft_f_nbr, ft_f_nbrlen, 13, NULL},
 	{"jF", ft_f_nbr, ft_f_nbrlen, 12, NULL},
 	{"zF", ft_f_nbr, ft_f_nbrlen, 12, NULL},
-	/* %e */
 	{"e", ft_e_nbr, ft_e_nbrlen, 12, NULL},
 	{"Le", ft_el_nbr, ft_el_nbrlen, 14, NULL},
 	{"le", ft_e_nbr, ft_e_nbrlen, 12, NULL},
@@ -147,36 +137,37 @@ t_conver	g_c[] = {
 	{"hhE", ft_e_nbr, ft_e_nbrlen, 13, NULL},
 	{"jE", ft_e_nbr, ft_e_nbrlen, 12, NULL},
 	{"zE", ft_e_nbr, ft_e_nbrlen, 12, NULL},
+	{"b", ft_bin_nbr, ft_bin_nbrlen, 9, "0b"},
+	{"lb", ft_bin_nbr, ft_bin_nbrlen, 9, "0b"},
+	{"llb", ft_bin_nbr, ft_bin_nbrlen, 9, "0b"},
+	{"hb", ft_bin_nbr, ft_bin_nbrlen, 9, "0b"},
+	{"hhb", ft_bin_nbr, ft_bin_nbrlen, 9, "0b"},
+	{"zb", ft_bin_nbr, ft_bin_nbrlen, 9, "0b"},
+	{"jb", ft_bin_nbr, ft_bin_nbrlen, 9, "0b"},
+	{"B", ft_bin_nbr, ft_bin_nbrlen, 9, "0B"},
+	{"lB", ft_bin_nbr, ft_bin_nbrlen, 9, "0B"},
+	{"llB", ft_bin_nbr, ft_bin_nbrlen, 9, "0B"},
+	{"hB", ft_bin_nbr, ft_bin_nbrlen, 9, "0B"},
+	{"hhB", ft_bin_nbr, ft_bin_nbrlen, 9, "0B"},
+	{"zB", ft_bin_nbr, ft_bin_nbrlen, 9, "0B"},
+	{"jB", ft_bin_nbr, ft_bin_nbrlen, 9, "0B"},
 	{0, 0, 0, 0, 0}
-	/* %b */
-	// {"b", ft_putbinary, ft_nbrblen, 9, "0b", 1, 0},
-	// {"lb", ft_putbinary, ft_nbrblen, 9, "0b", 1, 0},
-	// {"llb", ft_putbinary, ft_nbrblen, 9, "0b", 1, 0},
-	// {"hb", ft_putbinary, ft_nbrblen, 9, "0b", 1, 0},
-	// {"hhb", ft_putbinary, ft_nbrblen, 9, "0b", 1, 0},
-	// {"zb", ft_putbinary, ft_nbrblen, 9, "0b", 1, 0},
-	// {"jb", ft_putbinary, ft_nbrblen, 9, "0b", 1, 0},
-	// {"B", ft_putbinary, ft_nbrblen, 9, "0B", 1, 0},
-	// {"lB", ft_putbinary, ft_nbrblen, 9, "0B", 1, 0},
-	// {"llB", ft_putbinary, ft_nbrblen, 9, "0B", 1, 0},
-	// {"hB", ft_putbinary, ft_nbrblen, 9, "0B", 1, 0},
-	// {"hhB", ft_putbinary, ft_nbrblen, 9, "0B", 1, 0},
-	// {"zB", ft_putbinary, ft_nbrblen, 9, "0B", 1, 0},
-	// {"jB", ft_putbinary, ft_nbrblen, 9, "0B", 1, 0},
-	// {"r", ft_putnnp_l, ft_strnnplen, 8, NULL, 1, 0},
-	// {"lr", ft_putnnp_l, ft_strnnplen, 8, NULL, 1, 0},
-	// {"llr", ft_putnnp_l, ft_strnnplen, 8, NULL, 1, 0},
-	// {"hr", ft_putnnp_l, ft_strnnplen, 8, NULL, 1, 0},
-	// {"hhr", ft_putnnp_l, ft_strnnplen, 8, NULL, 1, 0},
-	// {"zr", ft_putnnp_l, ft_strnnplen, 8, NULL, 1, 0},
-	// {"jr", ft_putnnp_l, ft_strnnplen, 8, NULL, 1, 0},
-	// {"R", ft_putnnp_u, ft_strnnplen, 8, NULL, 1, 0},
-	// {"lR", ft_putnnp_u, ft_strnnplen, 8, NULL, 1, 0},
-	// {"llR", ft_putnnp_u, ft_strnnplen, 8, NULL, 1, 0},
-	// {"hR", ft_putnnp_u, ft_strnnplen, 8, NULL, 1, 0},
-	// {"hhR", ft_putnnp_u, ft_strnnplen, 8, NULL, 1, 0},
-	// {"zR", ft_putnnp_u, ft_strnnplen, 8, NULL, 1, 0},
-	// {"jR", ft_putnnp_u, ft_strnnplen, 8, NULL, 1, 0},
+	/* 
+	** {"r", ft_putnnp_l, ft_strnnplen, 8, NULL},
+	** {"lr", ft_putnnp_l, ft_strnnplen, 8, NULL},
+	** {"llr", ft_putnnp_l, ft_strnnplen, 8, NULL},
+	** {"hr", ft_putnnp_l, ft_strnnplen, 8, NULL},
+	** {"hhr", ft_putnnp_l, ft_strnnplen, 8, NULL},
+	** {"zr", ft_putnnp_l, ft_strnnplen, 8, NULL},
+	** {"jr", ft_putnnp_l, ft_strnnplen, 8, NULL},
+	** {"R", ft_putnnp_u, ft_strnnplen, 8, NULL},
+	** {"lR", ft_putnnp_u, ft_strnnplen, 8, NULL},
+	** {"llR", ft_putnnp_u, ft_strnnplen, 8, NULL},
+	** {"hR", ft_putnnp_u, ft_strnnplen, 8, NULL},
+	** {"hhR", ft_putnnp_u, ft_strnnplen, 8, NULL},
+	** {"zR", ft_putnnp_u, ft_strnnplen, 8, NULL},
+	** {"jR", ft_putnnp_u, ft_strnnplen, 8, NULL},
+	*/
 };
 
 void	set_types(t_conver *conv, t_basic *types)

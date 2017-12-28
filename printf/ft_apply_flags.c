@@ -32,9 +32,6 @@ int			ft_nonconv(char *str)
 
 static void	ft_output(t_conver *c, t_basic *types)
 {
-	// printf("/w= %d/\n", g_f.w);
-	// printf("/prec= %d/\n", g_f.p);
-	// printf("len= %zu\n", ft_len_func(c, *types, c->lenf));
 	if (ft_strpcmp(c->conv, "Ssc") && g_f.flags[4])
 		while (g_f.w-- > g_f.p)
 			ft_putchar('0');
@@ -47,10 +44,10 @@ static void	ft_output(t_conver *c, t_basic *types)
 	if ((g_f.flags[3] && (c->size <= 7 || c->size >= 9)
 		&& arg_zero(types, c) <= 0) || c->size == 8)
 		ft_putstr(c->prefix);
-		ft_wr_func(c, *types, c->wrfunc);
+	ft_wr_func(c, *types, c->wrfunc);
 	if (g_f.flags[0])
-			while (g_f.w-- > g_f.p)
-				ft_putchar(' ');
+		while (g_f.w-- > g_f.p)
+			ft_putchar(' ');
 	return ;
 }
 
@@ -73,7 +70,8 @@ static void	ft_apply_nbr2(t_conver *c, t_basic *types)
 	}
 	if (arg_zero(types, c) == -1 && g_f.p >= ft_len_func(c, *types, c->lenf))
 		g_f.p++;
-	if (g_f.flags[4] && !g_f.flags[0] && (c->size <= 7 || c->size >= 12 || c->size == 9))
+	if (g_f.flags[4] && !g_f.flags[0] && (c->size <= 7 ||
+		c->size >= 12 || c->size == 9))
 		!g_f.p ? g_f.p = g_f.w : 0;
 	if (g_f.p < ft_len_func(c, *types, c->lenf) && c->size < 12)
 		g_f.p = ft_len_func(c, *types, c->lenf);
@@ -84,21 +82,21 @@ static void	ft_apply_nbr(t_conver *c, t_basic *types)
 {
 	g_f.p < 0 ? g_f.p = 0 : 0;
 	(arg_zero(types, c) == 1 && (ft_strpcmp(c->conv, "cC")))
-		? g_f.p = 1 : 0; 
+		? g_f.p = 1 : 0;
 	if (((!ft_strpcmp(c->conv, "oO"))) || !g_f.flags[3])
 		if (arg_zero(types, c) == 1 && g_f.flags[8] && !g_f.p)
 		{
 			c->size == 8 ? ft_putstr(c->prefix) : 0;
 			while (g_f.w--)
-					ft_putchar(' ');
+				ft_putchar(' ');
 			return ;
 		}
 	(g_f.flags[1] && arg_zero(types, c) != -1) ? g_f.w-- : 0;
 	if (!g_f.flags[8])
-		{
-			c->size >= 12 ? g_f.p = 6 : 0;
-			c->size == 8 ? g_f.p = ft_len_func(c, *types, c->lenf) : 0;
-		}
+	{
+		c->size >= 12 ? g_f.p = 6 : 0;
+		c->size == 8 ? g_f.p = ft_len_func(c, *types, c->lenf) : 0;
+	}
 	ft_apply_nbr2(c, types);
 	ft_output(c, types);
 	return ;
@@ -125,6 +123,7 @@ void		ft_apply_flags(void)
 		if (ft_strchr(c.conv, 'S') &&
 			g_f.p > (i = ft_strunlen(*(void **)&types, g_f.p)))
 			g_f.p = i;
+		arg_zero(&types, &c) == 1 && !g_f.p ? types.p = "\0" : 0;
 		ft_output(&c, &types);
 	}
 	else

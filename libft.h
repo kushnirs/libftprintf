@@ -24,7 +24,7 @@ typedef struct	s_list
 	struct s_list	*next;
 }				t_list;
 
-extern size_t		symb;
+extern	size_t	g_symb;
 
 void			*ft_memset(void *memptr, int val, size_t num);
 void			ft_bzero(void *s, size_t n);

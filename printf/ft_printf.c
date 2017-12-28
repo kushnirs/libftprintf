@@ -21,7 +21,7 @@ static int	ft_find_conversion(char *str)
 	{
 		if (ft_strchr("hljzL", str[i]))
 			g_f.conversion[i] = str[i];
-		else if (ft_strchr("dDcCuUxXeEfFgGsSoOip", str[i]))
+		else if (ft_strchr("dDcCuUxXeEfFgGsSoOipbB", str[i]))
 		{
 			g_f.conversion[i] = str[i];
 			g_f.conversion[i + 1] = 0;
@@ -30,7 +30,7 @@ static int	ft_find_conversion(char *str)
 		else
 			break ;
 	}
-	if (!ft_strchr("dDcCuUxXeEfFgGsSoOip", str[i]))
+	if (!ft_strchr("dDcCuUxXeEfFgGsSoOipbB", str[i]))
 		return (ft_nonconv(&str[i]));
 	ft_apply_flags();
 	return (i + 1);
@@ -55,7 +55,6 @@ static int	ft_width(char *str)
 		g_f.w = -g_f.w;
 		g_f.flags[0] = 1;
 	}
-	// printf("/w= %d/\n", g_f.w);
 	return (i);
 }
 
@@ -92,21 +91,19 @@ static int	ft_read_flags(char *str)
 		if ((str[i] == '*' && str[i - 1] != '.') ||
 			(str[i] > '0' && str[i] <= '9' && str[i - 1] != '.'))
 			i += ft_width(&str[i]);
-		str[i] == '.' ?	i += ft_precision(&str[i]) : 0;
+		str[i] == '.' ? i += ft_precision(&str[i]) : 0;
 		if (!ft_strchr("-+ #0$L.*0123456789", str[i]))
 			break ;
 	}
 	str[i] ? i += ft_find_conversion(&str[i]) : 0;
-	// for (int k = 0; k < 9; k++)
-	// 	printf("/flags= %d/\n", g_f.flags[k]);
 	return (i);
 }
 
-int		ft_printf(const char *format, ...)
+int			ft_printf(const char *format, ...)
 {
 	char	*str;
 
-	symb = 0;
+	g_symb = 0;
 	str = (char*)format;
 	va_start(g_ap, format);
 	while (*str)
@@ -120,5 +117,5 @@ int		ft_printf(const char *format, ...)
 			ft_putchar(*str);
 		str++;
 	}
-	return (symb);
+	return (g_symb);
 }

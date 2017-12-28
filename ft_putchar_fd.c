@@ -14,6 +14,6 @@
 
 void	ft_putchar_fd(int c, int fd)
 {
-	symb += write(fd, &c, 1);
+	g_symb += write(fd, &c, 1);
 	return ;
 }
