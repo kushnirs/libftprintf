@@ -14,7 +14,7 @@
 
 int			ft_nonconv(char *str)
 {
-	if (g_f.flags[4] )
+	if (g_f.flags[4])
 		while (--g_f.w > 0)
 			ft_putchar('0');
 	if (!g_f.flags[0])
@@ -29,13 +29,13 @@ int			ft_nonconv(char *str)
 
 static void	ft_output(t_conver *c, t_basic *types, int lol, int *arg)
 {
-	if (ft_strpcmp(c->conv, "SscC") && g_f.flags[4])
+	if (ft_strpcmp(c->conv, "SscCeEfF") && g_f.flags[4])
 		while (g_f.w-- > g_f.p)
 			ft_putchar('0');
 	if (!g_f.flags[0])
 		while (g_f.w-- > g_f.p)
 			ft_putchar(' ');
-	if (g_f.flags[1] && ft_strpcmp(c->conv, "dDi")
+	if (g_f.flags[1] && ft_strpcmp(c->conv, "dDieEfF")
 		&& *arg >= 0)
 		ft_putchar('+');
 	if ((g_f.flags[3] && (c->size <= 7 || c->size >= 9)
@@ -50,6 +50,8 @@ static void	ft_output(t_conver *c, t_basic *types, int lol, int *arg)
 
 static void	ft_apply_nbr2(t_conver *c, t_basic *types, int *arg)
 {
+	g_f.w > g_f.p && ft_strpcmp(c->conv, "eEfF") ?
+	g_f.w -= (int)ft_len_func(c, *types, c->lenf) - g_f.p : 0;
 	if ((*arg != 1 && g_f.flags[3]) || c->size == 8)
 	{
 		g_f.w > (int)ft_strlen(c->prefix) ? g_f.w -= ft_strlen(c->prefix) : 0;
@@ -86,7 +88,7 @@ static void	ft_apply_nbr(t_conver *c, t_basic *types, int *arg)
 			ft_output(c, types, 1, arg);
 			return ;
 		}
-	(ft_strpcmp(c->conv, "dDi") && g_f.flags[1] && *arg != -1) ? g_f.w-- : 0;
+	ft_strpcmp(c->conv, "dDieEfF") && g_f.flags[1] && *arg != -1 ? g_f.w-- : 0;
 	if (!g_f.flags[8])
 	{
 		c->size >= 12 ? g_f.p = 6 : 0;
@@ -123,5 +125,4 @@ void		ft_apply_flags(va_list *ap)
 	}
 	else
 		ft_apply_nbr(&c, &types, &arg);
-	return ;
 }

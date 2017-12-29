@@ -37,12 +37,12 @@ void			ft_f_nbr(double n, int i)
 			n == INF ? ft_putstr("INF") : ft_putstr("NAN");
 		return ;
 	}
+	n > 0 ? n += 0.5 * ft_pow(0.1, (double)i) : 0;
+	n < 0 ? n -= 0.5 * ft_pow(0.1, (double)i) : 0;
 	ft_lnbr((long)n, 0);
 	i != 0 ? ft_putchar('.') : 0;
-	if (n < 0)
-		n = -n;
+	n < 0 ? n = -n : 0;
 	fraction = n - (long)n;
-	fraction += 0.5 * ft_pow(0.1, (double)i);
 	while (i-- > 0)
 	{
 		ft_unbr((fraction *= 10), 0);
@@ -56,23 +56,23 @@ void			ft_fl_nbr(t_ld n, int i)
 
 	if (n != n || n == INF)
 	{
-		if (!ft_strcmp("lf", g_f.conversion) ||
+		if (!ft_strcmp("Lf", g_f.conversion) ||
 			!ft_strcmp("f", g_f.conversion))
 			n == INF ? ft_putstr("inf") : ft_putstr("nan");
 		else
 			n == INF ? ft_putstr("INF") : ft_putstr("NAN");
 		return ;
 	}
-	ft_nbr((long)n, 0);
+	n > 0 ? n += 0.5 * ft_pow(0.1, (double)i) : 0;
+	n < 0 ? n -= 0.5 * ft_pow(0.1, (double)i) : 0;
+	ft_lnbr((uintmax_t)n, 0);
 	i != 0 ? ft_putchar('.') : 0;
-	if (n < 0)
-		n = -n;
-	fraction = n - (long)n;
-	fraction += 0.5 * ft_pow(0.1, (double)i);
+	n < 0 ? n = -n : 0;
+	fraction = n - (uintmax_t)n;
 	while (i-- > 0)
 	{
 		ft_unbr((fraction *= 10), 0);
-		fraction -= (long)fraction;
+		fraction -= (uintmax_t)fraction;
 	}
 }
 

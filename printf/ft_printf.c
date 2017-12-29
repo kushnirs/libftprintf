@@ -16,10 +16,6 @@ static int	ft_find_conversion(char *str, va_list *ap)
 {
 	int i;
 
-	// printf("width= %d\n", g_f.w );
-	// printf("prec= %d\n", g_f.p);
-	// for (int k = 0; k < 9; k++)
-	// 	printf("flags[%d]= %d\n",k, g_f.flags[k]);
 	i = -1;
 	while (str[++i])
 	{
@@ -89,14 +85,14 @@ static int	ft_read_flags(char *str, va_list *ap)
 		str[i] == '#' ? g_f.flags[3] = 1 : 0;
 		str[i] == '0' ? g_f.flags[4] = 1 : 0;
 		str[i] == '$' ? g_f.flags[5] = 1 : 0;
-		str[i] == 'L' ? g_f.flags[6] = 1 : 0;
+		str[i] == '`' ? g_f.flags[6] = 1 : 0;
 		str[i] == '\'' ? g_f.flags[7] = 1 : 0;
 		str[i] == '.' ? g_f.flags[8] = 1 : 0;
 		if ((str[i] == '*' && str[i - 1] != '.') ||
 			(str[i] > '0' && str[i] <= '9' && str[i - 1] != '.'))
 			i += ft_width(&str[i], ap);
 		str[i] == '.' ? i += ft_precision(&str[i], ap) : 0;
-		if (!ft_strchr("-+ #0$L.*0123456789", str[i]))
+		if (!ft_strchr("-+ #0$.*0123456789", str[i]))
 			break ;
 	}
 	g_f.flags[0] ? g_f.flags[4] = 0 : 0;

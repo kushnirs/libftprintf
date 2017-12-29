@@ -17,8 +17,6 @@
 # include <stddef.h>
 # include "../libft.h"
 
-# include <stdio.h>
-
 typedef int				t_wint;
 typedef	long double		t_ld;
 typedef	unsigned long	t_ul;

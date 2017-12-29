@@ -211,7 +211,6 @@ int		arg_zero(t_basic *arg, t_conver *c)
 	c->size == 13 && arg->f < 0 ? q = -1 : 0;
 	c->size == 14 && arg->lf == 0 ? q = 1 : 0;
 	c->size == 14 && arg->lf < 0 ? q = -1 : 0;
-	// printf("q= %d\n", q);
 	return (q);
 }
 

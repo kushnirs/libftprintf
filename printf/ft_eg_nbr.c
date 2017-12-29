@@ -25,10 +25,7 @@ void	ft_e_nbr(double n, int i)
 	while ((n = n / 10) >= 1)
 		count++;
 	ft_f_nbr(n *= 10, i);
-	if (!ft_strcmp("e", g_f.conversion) || !ft_strcmp("Le", g_f.conversion))
-		ft_putstr("e+");
-	else
-		ft_putstr("E+");
+	ft_strchr(g_f.conversion, 'e') ? ft_putstr("e+") : ft_putstr("E+");
 	if (count < 10)
 		ft_putstr("0");
 	ft_nbr(count, 0);
@@ -47,10 +44,7 @@ void	ft_el_nbr(t_ld n, int i)
 	while ((n = n / 10) >= 1)
 		count++;
 	ft_fl_nbr(n *= 10, i);
-	if (!ft_strcmp("e", g_f.conversion) || !ft_strcmp("Le", g_f.conversion))
-		ft_putstr("e+");
-	else
-		ft_putstr("E+");
+	ft_strchr(g_f.conversion, 'e') ? ft_putstr("e+") : ft_putstr("E+");
 	if (count < 10)
 		ft_putstr("0");
 	ft_nbr(count, i);
