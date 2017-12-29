@@ -6,11 +6,24 @@
 /*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/27 23:56:36 by skushnir          #+#    #+#             */
-/*   Updated: 2017/12/27 23:13:41 by sergee           ###   ########.fr       */
+/*   Updated: 2017/12/29 11:48:59 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+size_t		ft_ucharlen(int c)
+{
+	if (MB_CUR_MAX == 1 || c <= 0x7F)
+		return (1);
+	else if (c <= 0x7FF)
+		return (2);
+	else if (c <= 0xFFFF)
+		return (3);
+	else if (c <= 0x10FFFF)
+		return (4);
+	return (0);
+}
 
 size_t		ft_strlen(const char *string)
 {
@@ -61,17 +74,4 @@ size_t		ft_strunlen(const int *string, size_t n)
 	while (*string && (j -= ft_ucharlen(*string)) >= 0)
 		i += ft_ucharlen(*string++);
 	return (i);
-}
-
-size_t		ft_ucharlen(int c)
-{
-	if (MB_CUR_MAX < 4 || c <= 0x7F)
-		return (1);
-	else if (c <= 0x7FF)
-		return (2);
-	else if (c <= 0xFFFF)
-		return (3);
-	else if (c <= 0x10FFFF)
-		return (4);
-	return (0);
 }

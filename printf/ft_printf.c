@@ -6,7 +6,7 @@
 /*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 22:25:16 by sergee            #+#    #+#             */
-/*   Updated: 2017/12/28 00:33:20 by sergee           ###   ########.fr       */
+/*   Updated: 2017/12/29 10:19:46 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ static int	ft_find_conversion(char *str, va_list *ap)
 {
 	int i;
 
+	// printf("width= %d\n", g_f.w );
+	// printf("prec= %d\n", g_f.p);
+	// for (int k = 0; k < 9; k++)
+	// 	printf("flags[%d]= %d\n",k, g_f.flags[k]);
 	i = -1;
 	while (str[++i])
 	{
@@ -66,7 +70,7 @@ static int	ft_precision(char *str, va_list *ap)
 	i = 0;
 	if (str[i] == '.' && str[i + 1] == '*')
 		g_f.p = va_arg(*ap, int);
-	else if (str[i] == '.' && str[i + 1] > '0' && str[i + 1] <= '9' && ++i)
+	else if (str[i] == '.' && str[i + 1] >= '0' && str[i + 1] <= '9' && ++i)
 		while (str[i] >= '0' && str[i] <= '9')
 			g_f.p = g_f.p * 10 + (str[i++] - 48);
 	return (i);
@@ -95,6 +99,7 @@ static int	ft_read_flags(char *str, va_list *ap)
 		if (!ft_strchr("-+ #0$L.*0123456789", str[i]))
 			break ;
 	}
+	g_f.flags[0] ? g_f.flags[4] = 0 : 0;
 	str[i] ? i += ft_find_conversion(&str[i], ap) : 0;
 	return (i);
 }
